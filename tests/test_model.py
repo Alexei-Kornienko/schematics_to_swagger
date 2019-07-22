@@ -14,6 +14,7 @@ WEATHER_REPORT_DEFINITION = {
         },
         'temperature': {
             'type': 'number',
+            'format': 'double',
             'required': True
         },
         'taken_at': {

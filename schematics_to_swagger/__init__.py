@@ -20,8 +20,16 @@ def _map_type_properties(t):
 
 
 _DATATYPES = {
+    types.BooleanType: lambda t: dict(type='boolean', **_map_type_properties(t)),
+    types.IntType: lambda t: dict(type='integer', format='int32', **_map_type_properties(t)),
+    types.LongType: lambda t: dict(type='integer', format='int64', **_map_type_properties(t)),
+    types.FloatType: lambda t: dict(type='number', format='float', **_map_type_properties(t)),
+    types.DecimalType: lambda t: dict(type='number', format='double', **_map_type_properties(t)),
     types.StringType: lambda t: dict(type='string', **_map_type_properties(t)),
-    types.DecimalType: lambda t: dict(type='number', **_map_type_properties(t)),
+    types.UUIDType: lambda t: dict(type='string', format='uuid', **_map_type_properties(t)),
+    types.MD5Type: lambda t: dict(type='string', format='md5', **_map_type_properties(t)),
+    types.SHA1Type: lambda t: dict(type='string', format='sha1', **_map_type_properties(t)),
+    types.DateType: lambda t: dict(type='string', format='date', **_map_type_properties(t)),
     types.DateTimeType: lambda t: dict(type='string', format='date-time', **_map_type_properties(t))
 }
 
