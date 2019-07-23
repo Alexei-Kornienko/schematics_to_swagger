@@ -28,7 +28,20 @@ WEATHER_STATS_DEF = {
     'type': 'object',
     'description': None,
     'properties': {
-        'last_report': {'$ref': '#/definitions/WeatherReport'}
+        'last_report': {'$ref': '#/definitions/WeatherReport'},
+        'prev_reports': {
+            'type': 'array',
+            'items': {
+                '$ref': '#/definitions/WeatherReport'
+            }
+        },
+        'date_list': {
+            'type': 'array',
+            'items': {
+                'type': 'string',
+                'format': 'date-time'
+            }
+        }
     },
 }
 
@@ -48,7 +61,7 @@ def test_read_models_from_module():
     assert expected == data
 
 
-def test_compound_type_model_type():
+def test_compound_type():
     expected = WEATHER_STATS_DEF
     data = schematics_to_swagger.model_to_definition(models.WeatherStats)
     assert expected == data

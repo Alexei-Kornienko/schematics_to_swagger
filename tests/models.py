@@ -12,3 +12,5 @@ class WeatherReport(Model):
 
 class WeatherStats(Model):
     last_report = types.ModelType(WeatherReport)
+    prev_reports = types.ListType(types.ModelType(WeatherReport))
+    date_list = types.ListType(types.DateTimeType())

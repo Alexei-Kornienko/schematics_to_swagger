@@ -34,7 +34,8 @@ _DATATYPES = {
     types.DateTimeType: lambda t: dict(type='string', format='date-time', **_map_type_properties(t)),
 
     # Compound types
-    types.ModelType: lambda t: {'$ref': '#/definitions/%s' % t.model_name}
+    types.ModelType: lambda t: {'$ref': '#/definitions/%s' % t.model_name},
+    types.ListType: lambda t: dict(type='array', items=_map_schematics_type(t.field))
 }
 
 
