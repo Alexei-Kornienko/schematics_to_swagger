@@ -2,6 +2,8 @@ import inspect
 from schematics import models
 from schematics import types
 
+name = 'schematics_to_swagger'
+
 _KNOWN_PROPS = {
     'required': 'required',
     'max_length': 'maxLength',
