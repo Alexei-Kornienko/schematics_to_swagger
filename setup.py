@@ -55,6 +55,7 @@ setup(
     include_package_data=True,
     description='Helper library to build Swagger Schema objects from Schematics models',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     classifiers=[
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
