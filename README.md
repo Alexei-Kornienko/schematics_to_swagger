@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Alexei-Kornienko/schematics_to_swagger.svg?branch=master)](https://travis-ci.com/Alexei-Kornienko/schematics_to_swagger)
+
 # Usecase
 
 * I have a REST API built using aiohttp and schematics.
