@@ -6,7 +6,8 @@ _KNOWN_PROPS = {
     'required': 'required',
     'max_length': 'maxLength',
     'min_length': 'minLength',
-    'regex': 'pattern'
+    'regex': 'pattern',
+    'choices': 'enum',
 }
 
 
