@@ -1,0 +1,22 @@
+language: python
+sudo: false
+python:
+  - '3.6'
+
+install:
+  - python setup.py install
+  - pip install -r requirements-dev.txt
+script:
+  - py.test --cov=schematics_to_swagger
+after_success:
+  - codecov
+
+deploy:
+  provider: pypi
+  user: Alexei_987
+  distributions: sdist bdist_wheel
+  server: https://test.pypi.org/simple/
+  on:
+    branch: master
+  password:
+    secure: S+HDMWK5IHb3XZODNitjY15weHcS/VfFUKajgF07iD77JT7EQ28K8Re19fpBCMe4oP0ifXcjViru9H0P7MCuB8ewiCuoecIQGkK3XH9yBkfQ8cpPk7bYeOzEj7zOOGKZEguslPZlMrnBu/VN4Y1P+MAZ6owZg5bnvHzSfABUt7XFIAz1iXc92smfa0jrSsFAzVsCQLRv7YwyYSMdpZcgbCMBIW9JONs/Z5TR1O93RHllT7jG3xgOoqQHRWI5UAiBIouUmWQMyyRt3DUvjL097XqGgQXI9vsDITrZ4QPijo1NmW0Z1YhH8wAcAgmUvrn64U65oBVAnznlHHN6OBdovj7pqZJA/mEOzkSQ0d0tLJVp6gKIKpQEdrkg7evuQT4jA+h6lY8xApmGGkFgARZh1i6gFB3loHKBFl+rkzTUn4HHnJ5ZLuBsnyk8TlIgzQulv8jtQynFGXyQHFo0unOy2c/jEzubFXfU5aeALdVibRGp6ywTDHwhH1YYQDHk34ml78RT30NDnNEjdQ524cCXGm39SxLgHfsXpo9e9GKLhbFMk+vbePLy13It3HosI+Z1qENwdF/AXmIFz1QJ/TAYGGNGoTcCwRGk3g8ldGgJ4HSllEGjjBBrnxjZxUrNFi1De+38v/ksBYRD8k0NCCMb55VoHsD9SedcNwbc/rQAyCU=
