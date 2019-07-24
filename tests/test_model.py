@@ -10,7 +10,8 @@ WEATHER_REPORT_DEFINITION = {
     'properties': {
         'city': {
             'type': 'string',
-            'maxLength': 50
+            'maxLength': 50,
+            'readOnly': True
         },
         'temperature': {
             'type': 'number',

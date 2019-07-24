@@ -19,6 +19,9 @@ def _map_type_properties(t):
         prop_value = getattr(t, k, None)
         if prop_value:
             props[v] = prop_value
+    # passthrough metadata items
+    for k, v in t.metadata.items():
+        props[k] = v
     return props
 
 

@@ -5,7 +5,7 @@ from schematics import types
 
 class WeatherReport(Model):
     """Some sample class for Weather report"""
-    city = types.StringType(max_length=50)
+    city = types.StringType(max_length=50, metadata={'readOnly': True})
     temperature = types.DecimalType(required=True)
     taken_at = types.DateTimeType(default=datetime.datetime.now)
 
