@@ -39,6 +39,10 @@ _DATATYPES = {
     types.DateType: lambda t: dict(type='string', format='date', **_map_type_properties(t)),
     types.DateTimeType: lambda t: dict(type='string', format='date-time', **_map_type_properties(t)),
 
+    # Net types
+    types.EmailType: lambda t: dict(type='string', format='email', **_map_type_properties(t)),
+    types.URLType: lambda t: dict(type='string', format='uri', **_map_type_properties(t)),
+
     # Compound types
     types.ModelType: lambda t: {'$ref': '#/definitions/%s' % t.model_name},
     types.ListType: lambda t: dict(type='array', items=_map_schematics_type(t.field))

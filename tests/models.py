@@ -8,6 +8,8 @@ class WeatherReport(Model):
     city = types.StringType(max_length=50, metadata={'readOnly': True})
     temperature = types.DecimalType(required=True)
     taken_at = types.DateTimeType(default=datetime.datetime.now)
+    author = types.EmailType()
+    some_url = types.URLType()
 
 
 class WeatherStats(Model):

@@ -18,6 +18,14 @@ WEATHER_REPORT_DEFINITION = {
             'format': 'double',
             'required': True
         },
+        'author': {
+            'type': 'string',
+            'format': 'email',
+        },
+        'some_url': {
+            'type': 'string',
+            'format': 'uri',
+        },
         'taken_at': {
             'type': 'string',
             'format': 'date-time'
