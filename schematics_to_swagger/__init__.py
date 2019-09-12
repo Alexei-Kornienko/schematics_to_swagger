@@ -59,7 +59,7 @@ def model_to_definition(model):
         'type': 'object',
         'title': model.__name__,
         'description': model.__doc__,
-        'properties': {k: _map_schematics_type(v) for k, v in model._fields.items()}
+        'properties': {k: _map_schematics_type(v) for k, v in model.fields.items()}
     }
 
 
