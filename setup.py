@@ -45,7 +45,7 @@ with open(join(dirname(__file__), 'README.md')) as f:
 
 setup(
     name='schematics-to-swagger',
-    version='1.2.1',
+    version='1.2.2',
     install_requires=required,
     url='https://github.com/Alexei-Kornienko/schematics_to_swagger',
     license='MIT',
