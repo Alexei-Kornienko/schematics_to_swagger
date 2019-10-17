@@ -15,8 +15,7 @@ WEATHER_REPORT_DEFINITION = {
         },
         'temperature': {
             'type': 'number',
-            'format': 'double',
-            'required': True
+            'format': 'double'
         },
         'author': {
             'type': 'string',
@@ -30,7 +29,8 @@ WEATHER_REPORT_DEFINITION = {
             'type': 'string',
             'format': 'date-time'
         }
-    }
+    },
+    'required': ['temperature']
 }
 WEATHER_STATS_DEF = {
     'title': 'WeatherStats',
