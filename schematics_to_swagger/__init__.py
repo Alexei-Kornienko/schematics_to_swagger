@@ -5,7 +5,6 @@ from schematics import types
 name = 'schematics_to_swagger'
 
 _KNOWN_PROPS = {
-    'required': 'required',
     'max_length': 'maxLength',
     'min_length': 'minLength',
     'regex': 'pattern',
@@ -55,12 +54,18 @@ def _map_schematics_type(t):
 
 
 def model_to_definition(model):
-    return {
+    fields = model.fields.items()
+    result_info = {
         'type': 'object',
         'title': model.__name__,
         'description': model.__doc__,
-        'properties': {k: _map_schematics_type(v) for k, v in model.fields.items()}
+        'properties': {k: _map_schematics_type(v) for k, v in fields}
     }
+    required = [k for k, v in fields if getattr(v, 'required')]
+    if required:
+        result_info['required'] = required
+
+    return result_info
 
 
 def read_models_from_module(module):
