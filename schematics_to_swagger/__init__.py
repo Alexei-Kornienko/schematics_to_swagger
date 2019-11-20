@@ -54,17 +54,24 @@ def _map_schematics_type(t):
 
 
 def model_to_definition(model):
-    fields = model.fields.items()
+    properties = {}
+    required = []
+
+    for field_name, field in model.fields.items():
+        if field_name.startswith(f'_{model.__name__}'):
+            continue  # Exclude private fields
+        properties[field_name] = _map_schematics_type(field)
+        if getattr(field, 'required'):
+            required.append(field_name)
+
     result_info = {
         'type': 'object',
         'title': model.__name__,
         'description': model.__doc__,
-        'properties': {k: _map_schematics_type(v) for k, v in fields}
+        'properties': properties
     }
-    required = [k for k, v in fields if getattr(v, 'required')]
     if required:
         result_info['required'] = required
-
     return result_info
 
 
