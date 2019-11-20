@@ -16,3 +16,10 @@ class WeatherStats(Model):
     last_report = types.ModelType(WeatherReport)
     prev_reports = types.ListType(types.ModelType(WeatherReport))
     date_list = types.ListType(types.DateTimeType())
+
+
+class WeatherPrivateData(Model):
+    """Some sample model with private field"""
+    city = types.StringType(max_length=50, metadata={'readOnly': True})
+    temperature = types.DecimalType(required=True)
+    __private_information = types.StringType(max_length=50)
