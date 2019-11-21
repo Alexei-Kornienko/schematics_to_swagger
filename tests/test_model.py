@@ -53,6 +53,23 @@ WEATHER_STATS_DEF = {
         }
     },
 }
+WEATHER_PRIVATE_DATA = {
+    'title': 'WeatherPrivateData',
+    'type': 'object',
+    'description': 'Some sample model with private field',
+    'properties': {
+        'city': {
+            'type': 'string',
+            'maxLength': 50,
+            'readOnly': True
+        },
+        'temperature': {
+            'type': 'number',
+            'format': 'double'
+        }
+    },
+    'required': ['temperature']
+}
 
 
 def test_model_to_definition():
@@ -64,7 +81,8 @@ def test_model_to_definition():
 def test_read_models_from_module():
     expected = {
         'WeatherReport': WEATHER_REPORT_DEFINITION,
-        'WeatherStats': WEATHER_STATS_DEF
+        'WeatherStats': WEATHER_STATS_DEF,
+        'WeatherPrivateData': WEATHER_PRIVATE_DATA
     }
     data = schematics_to_swagger.read_models_from_module(models)
     assert expected == data
@@ -74,3 +92,9 @@ def test_compound_type():
     expected = WEATHER_STATS_DEF
     data = schematics_to_swagger.model_to_definition(models.WeatherStats)
     assert expected == data
+
+
+def test_private_fields():
+    expected = WEATHER_PRIVATE_DATA
+    definition = schematics_to_swagger.model_to_definition(models.WeatherPrivateData)
+    assert expected == definition
