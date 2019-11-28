@@ -11,7 +11,7 @@ SwaggerProp = namedtuple('SwaggerProp', ['name', 'func'], defaults=(None, lambda
 _KNOWN_PROPS = {
     'max_length': SwaggerProp('maxLength'),
     'min_length': SwaggerProp('minLength'),
-    'regex': SwaggerProp('pattern'),
+    'regex': SwaggerProp('pattern', lambda x: x.pattern),
     'choices': SwaggerProp('enum'),
 }
 
