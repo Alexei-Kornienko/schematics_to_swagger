@@ -1,14 +1,18 @@
 import inspect
+from collections import namedtuple
+
 from schematics import models
 from schematics import types
 
 name = 'schematics_to_swagger'
 
+SwaggerProp = namedtuple('SwaggerProp', ['name', 'func'], defaults=(None, lambda x: x))
+
 _KNOWN_PROPS = {
-    'max_length': 'maxLength',
-    'min_length': 'minLength',
-    'regex': 'pattern',
-    'choices': 'enum',
+    'max_length': SwaggerProp('maxLength'),
+    'min_length': SwaggerProp('minLength'),
+    'regex': SwaggerProp('pattern'),
+    'choices': SwaggerProp('enum'),
 }
 
 
@@ -17,7 +21,7 @@ def _map_type_properties(t):
     for k, v in _KNOWN_PROPS.items():
         prop_value = getattr(t, k, None)
         if prop_value:
-            props[v] = prop_value
+            props[v.name] = v.func(prop_value)
     # passthrough metadata items
     for k, v in t.metadata.items():
         props[k] = v
