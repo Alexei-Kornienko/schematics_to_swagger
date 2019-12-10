@@ -53,6 +53,27 @@ WEATHER_STATS_DEF = {
         }
     },
 }
+WEATHER_STATS_DEF_V3 = {
+    'title': 'WeatherStats',
+    'type': 'object',
+    'description': None,
+    'properties': {
+        'last_report': {'$ref': '#/components/schemas/WeatherReport'},
+        'prev_reports': {
+            'type': 'array',
+            'items': {
+                '$ref': '#/components/schemas/WeatherReport'
+            }
+        },
+        'date_list': {
+            'type': 'array',
+            'items': {
+                'type': 'string',
+                'format': 'date-time'
+            }
+        }
+    },
+}
 WEATHER_PRIVATE_DATA = {
     'title': 'WeatherPrivateData',
     'type': 'object',
@@ -98,3 +119,13 @@ def test_private_fields():
     expected = WEATHER_PRIVATE_DATA
     definition = schematics_to_swagger.model_to_definition(models.WeatherPrivateData)
     assert expected == definition
+
+
+def test_read_models_from_module_v3():
+    expected = {
+        'WeatherReport': WEATHER_REPORT_DEFINITION,
+        'WeatherStats': WEATHER_STATS_DEF_V3,
+        'WeatherPrivateData': WEATHER_PRIVATE_DATA
+    }
+    data = schematics_to_swagger.read_models_from_module(models, version=3)
+    assert expected == data
