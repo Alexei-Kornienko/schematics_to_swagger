@@ -6,6 +6,8 @@ from schematics import types
 
 name = 'schematics_to_swagger'
 
+DEFAULT_SWAGGER_VERSION = 2
+
 SwaggerProp = namedtuple('SwaggerProp', ['name', 'func'], defaults=(None, lambda x: x))
 
 _KNOWN_PROPS = {
@@ -79,7 +81,18 @@ def model_to_definition(model):
     return result_info
 
 
-def read_models_from_module(module):
+def version_dependencies(version):
+    if version == 3:
+        global _DATATYPES
+        _DATATYPES.update({
+            types.ModelType: lambda t: dict(
+                {'$ref': '#/components/schemas/%s' % t.model_name}, **_map_type_properties(t)
+            )
+        })
+
+
+def read_models_from_module(module, version=DEFAULT_SWAGGER_VERSION):
+    version_dependencies(version)
     results = {}
     for item in dir(module):
         if item.startswith('_'):
