@@ -58,12 +58,14 @@ WEATHER_STATS_DEF_V3 = {
     'type': 'object',
     'description': None,
     'properties': {
-        'last_report': {'$ref': '#/components/schemas/WeatherReport'},
+        'last_report': {
+            'allOf': [{'$ref': '#/components/schemas/WeatherReport'}]
+        },
         'prev_reports': {
             'type': 'array',
             'items': {
-                '$ref': '#/components/schemas/WeatherReport'
-            }
+                'allOf': [{'$ref': '#/components/schemas/WeatherReport'}]
+            },
         },
         'date_list': {
             'type': 'array',
