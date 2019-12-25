@@ -86,7 +86,7 @@ def version_dependencies(version):
         global _DATATYPES
         _DATATYPES.update({
             types.ModelType: lambda t: dict(
-                {'allOf': [{'$ref': '#/components/schemas/%s' % t.model_name}]}, **_map_type_properties(t)
+                {'$ref': '#/components/schemas/%s' % t.model_name}, **_map_type_properties(t)
             )
         })
 
