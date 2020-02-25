@@ -21,5 +21,5 @@ class WeatherStats(Model):
 class WeatherPrivateData(Model):
     """Some sample model with private field"""
     city = types.StringType(max_length=50, metadata={'readOnly': True})
-    temperature = types.DecimalType(required=True)
+    temperature = types.DecimalType(required=True, min_value=-50, max_value=50)
     __private_information = types.StringType(max_length=50)
