@@ -88,7 +88,9 @@ WEATHER_PRIVATE_DATA = {
         },
         'temperature': {
             'type': 'number',
-            'format': 'double'
+            'format': 'double',
+            'minimum': -50,
+            'maximum': 50
         }
     },
     'required': ['temperature']
