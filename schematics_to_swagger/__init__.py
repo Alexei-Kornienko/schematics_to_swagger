@@ -83,13 +83,20 @@ def model_to_definition(model):
     return result_info
 
 
+def _build_model_type_v3(t):
+    ref = {'$ref': f'#/components/schemas/{t.model_name}'}
+    if t.metadata and not getattr(t, 'required', False):
+        field = {'allOf': [ref], **_map_type_properties(t)}
+    else:
+        field = {**ref, **_map_type_properties(t)}
+    return field
+
+
 def version_dependencies(version):
     if version == 3:
         global _DATATYPES
         _DATATYPES.update({
-            types.ModelType: lambda t: dict(
-                {'$ref': '#/components/schemas/%s' % t.model_name}, **_map_type_properties(t)
-            )
+            types.ModelType: _build_model_type_v3
         })
 
 
