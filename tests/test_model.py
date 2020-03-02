@@ -1,3 +1,5 @@
+from schematics import types
+
 import schematics_to_swagger
 
 from tests import models
@@ -133,3 +135,28 @@ def test_read_models_from_module_v3():
     }
     data = schematics_to_swagger.read_models_from_module(models, version=3)
     assert expected == data
+
+
+def test_model_type_with_metadata_v3():
+    expected = {'allOf': [{'$ref': '#/components/schemas/WeatherReport'}], 'readOnly': True}
+    model = type(
+        'NewWeatherStats',
+        (models.WeatherStats,),
+        {'last_report': types.ModelType(models.WeatherReport, metadata={'readOnly': True})})
+
+    schematics_to_swagger.version_dependencies(3)
+    definition = schematics_to_swagger.model_to_definition(model)
+    assert expected == definition['properties']['last_report']
+
+
+def test_model_type_required_with_metadata_v3():
+    expected = {'$ref': '#/components/schemas/WeatherReport', 'readOnly': True}
+    model = type(
+        'NewWeatherStats',
+        (models.WeatherStats,),
+        {'last_report': types.ModelType(models.WeatherReport, required=True, metadata={'readOnly': True})})
+
+    schematics_to_swagger.version_dependencies(3)
+    definition = schematics_to_swagger.model_to_definition(model)
+    assert expected == definition['properties']['last_report']
+    assert ['last_report'] == definition['required']
